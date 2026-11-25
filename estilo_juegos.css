@@ -1,0 +1,16 @@
+/* Tarjetas de juegos (se carga después de estilo_letras.css) */
+.grid-juegos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+.juego-card { background: #fff; border: 2px solid #e5e5e5; border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; text-align: center; transition: transform .15s, box-shadow .15s; }
+.juego-card:hover { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0,0,0,.12); }
+.juego-card .emoji { font-size: 3.5rem; line-height: 1.2; }
+.juego-card h2 { margin: 10px 0 6px; font-size: 1.3rem; color: #2c3e50; }
+.juego-card .etiquetas { color: #d61a78; font-size: .8rem; font-weight: bold; letter-spacing: .5px; margin-bottom: 10px; }
+.juego-card p { color: #666; font-size: .95rem; line-height: 1.5; margin: 0 0 18px; flex: 1; }
+.btn-jugar { display: block; background: #d61a78; color: #fff; text-decoration: none; font-weight: bold;
+    padding: 12px; border-radius: 12px; transition: background .2s; }
+.btn-jugar:hover { background: #940731; }
+.juego-card.pronto { background: #fafafa; border-style: dashed; }
+.juego-card.pronto .emoji, .juego-card.pronto h2 { opacity: .5; }
+.btn-jugar.deshabilitado { background: #ddd; color: #888; cursor: not-allowed; }
+.btn-jugar.deshabilitado:hover { background: #ddd; }

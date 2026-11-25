@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendiendo Otomí</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { text-align: center; color: white; min-height: 100vh; }
+        h1 { font-size: 28px; margin: 10px 0 20px; }
+        h3 { font-size: 18px; opacity: 0.9; margin-bottom: 5px; }
+        .container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; }
+        .card { background: white; color: #502258; padding: 15px; border-radius: 15px; width: 150px; cursor: pointer; transition: transform 0.2s; }
+        .card:hover { transform: scale(1.05); }
+        .card img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px; }
+        .botones { margin-top: 20px; }
+        button { padding: 12px 30px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; margin: 5px; font-weight: bold; }
+        .comprobar { background: #28a745; color: white; }
+        .saltar { background: #6c757d; color: white; }
+        .resultado { margin-top: 20px; font-size: 20px; font-weight: bold; padding: 10px; }
+        input { padding: 12px; font-size: 18px; border-radius: 8px; border: 2px solid #502258; width: 250px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<!-- LECCIÓN 1: Rosa - VISIBLE -->
+<section id="leccion1" style="background-color:#502258; padding:30px; min-height:100vh;">
+    <h3>Nueva palabra</h3>
+    <h1>¿Cuál de estos es Rosa?</h1>
+    <div class="container">
+        <div class="card" onclick="seleccionarOpcion(1); reproducirAudio2();"><img src="img/rosa.webp"><h3>Roxa</h3></div>
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio1();"><img src="img/orange-fruit-cartoon-illustration-vector.jpg"><h3>Naraxa</h3></div>
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio3();"><img src="img/cafe.jpg"><h3>Boxo</h3></div>
+    </div>
+    <p id="resultado1" class="resultado"></p>
+    <div class="botones">
+        <button class="comprobar" onclick="verificarLeccion1()">COMPROBAR</button>
+        <button class="saltar" onclick="mostrarLeccion2()">SALTAR</button>
+    </div>
+</section>
+
+<!-- LECCIÓN 2: Café - OCULTA -->
+<section id="leccion2" style="background-color:#e1a3ec; padding:30px; min-height:100vh; display:none;">
+    <h3>Nueva palabra</h3>
+    <h1>¿Cuál de estos es el Café?</h1>
+    <div class="container">
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio1();"><img src="img/orange-fruit-cartoon-illustration-vector.jpg"><h3>Naraxa</h3></div>
+        <div class="card" onclick="seleccionarOpcion(1); reproducirAudio3();"><img src="img/cafe.jpg"><h3>Boxo</h3></div>
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio4();"><img src="img/te.jpg"><h3>Uthe</h3></div>
+    </div>
+    <p id="resultado2" class="resultado"></p>
+    <div class="botones">
+        <button class="comprobar" onclick="verificarLeccion2()">COMPROBAR</button>
+        <button class="saltar" onclick="mostrarLeccion3()">SALTAR</button>
+    </div>
+</section>
+
+<!-- LECCIÓN 3: Naranja - OCULTA -->
+<section id="leccion3" style="background-color:#edbff5; padding:30px; min-height:100vh; display:none;">
+    <h3>Nueva palabra</h3>
+    <h1>¿Cuál de estos es Naranja?</h1>
+    <div class="container">
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio3();"><img src="img/cafe.jpg"><h3>Boxo</h3></div>
+        <div class="card" onclick="seleccionarOpcion(1); reproducirAudio1();"><img src="img/orange-fruit-cartoon-illustration-vector.jpg"><h3>Naranxa</h3></div>
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio4();"><img src="img/te.jpg"><h3>Uthe</h3></div>
+    </div>
+    <p id="resultado3" class="resultado"></p>
+    <div class="botones">
+        <button class="comprobar" onclick="verificarLeccion3()">COMPROBAR</button>
+        <button class="saltar" onclick="mostrarLeccion4()">SALTAR</button>
+    </div>
+</section>
+
+<!-- LECCIÓN 4: Escribir - OCULTA -->
+<section id="leccion4" style="background-color:#f5e1ff; padding:30px; min-height:100vh; display:none;">
+    <h3>Escribe esto</h3>
+    <h1>Escribe en español "Boxo"</h1>
+    <input type="text" id="respuestaBoxo" placeholder="Escribe aquí...">
+    <p id="resultado4" class="resultado"></p>
+    <div class="botones">
+        <button class="comprobar" onclick="comprobarBoxo()">COMPROBAR</button>
+        <button class="saltar" onclick="mostrarLeccion5()">SALTAR</button>
+    </div>
+</section>
+
+<!-- LECCIÓN 5: Repaso Naranja - OCULTA -->
+<section id="leccion5" style="background-color:#ffcc99; padding:30px; min-height:100vh; display:none;">
+    <h3>¡Repasemos!</h3>
+    <h1>¿Cuál significa Naranja?</h1>
+    <div class="container">
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio4();"><img src="img/te.jpg"><h3>Uthe</h3></div>
+        <div class="card" onclick="seleccionarOpcion(1); reproducirAudio1();"><img src="img/orange-fruit-cartoon-illustration-vector.jpg"><h3>Naranxa</h3></div>
+        <div class="card" onclick="seleccionarOpcion(0); reproducirAudio3();"><img src="img/cafe.jpg"><h3>Boxo</h3></div>
+    </div>
+    <p id="resultado5" class="resultado"></p>
+    <div class="botones">
+        <button class="comprobar" onclick="verificarLeccion5()">COMPROBAR</button>
+        <button class="saltar" onclick="finalizar()">SALTAR</button>
+    </div>
+</section>
+
+<!-- AUDIOS CORREGIDOS -->
+<audio id="audio1" src="audio/naranxa.ogg"></audio>
+<audio id="audio2" src="audio/Roxa.ogg"></audio>
+<audio id="audio3" src="audio/boxo.ogg"></audio>
+<audio id="audio4" src="audio/uthe.ogg"></audio>
+
+<script>
+let respuestaCorrecta = null;
+function reproducirAudio1(){ document.getElementById("audio1").currentTime=0; document.getElementById("audio1").play(); }
+function reproducirAudio2(){ document.getElementById("audio2").currentTime=0; document.getElementById("audio2").play(); }
+function reproducirAudio3(){ document.getElementById("audio3").currentTime=0; document.getElementById("audio3").play(); }
+function reproducirAudio4(){ document.getElementById("audio4").currentTime=0; document.getElementById("audio4").play(); }
+function seleccionarOpcion(v){ respuestaCorrecta=v; }
+
+function mostrarLeccion2(){ document.getElementById("leccion1").style.display="none"; document.getElementById("leccion2").style.display="block"; respuestaCorrecta=null; }
+function mostrarLeccion3(){ document.getElementById("leccion2").style.display="none"; document.getElementById("leccion3").style.display="block"; respuestaCorrecta=null; }
+function mostrarLeccion4(){ document.getElementById("leccion3").style.display="none"; document.getElementById("leccion4").style.display="block"; }
+function mostrarLeccion5(){ document.getElementById("leccion4").style.display="none"; document.getElementById("leccion5").style.display="block"; respuestaCorrecta=null; }
+function finalizar(){ alert("🎉 ¡Felicidades! Terminaste todas las lecciones"); }
+
+function verificarLeccion1(){
+    const r=document.getElementById("resultado1");
+    if(respuestaCorrecta===1){ r.innerHTML="¡Correcto! ✅ Roxa = Rosa"; r.style.color="#90ee90"; setTimeout(mostrarLeccion2,1200); }
+    else if(respuestaCorrecta===0){ r.innerHTML="Incorrecto ❌ Intenta de nuevo"; r.style.color="#ffb3b3"; }
+    else{ r.innerHTML="Selecciona una opción primero"; r.style.color="#ffffb3"; }
+}
+function verificarLeccion2(){
+    const r=document.getElementById("resultado2");
+    if(respuestaCorrecta===1){ r.innerHTML="¡Correcto! ✅ Boxo = Café"; r.style.color="#90ee90"; setTimeout(mostrarLeccion3,1200); }
+    else if(respuestaCorrecta===0){ r.innerHTML="Incorrecto ❌ Intenta de nuevo"; r.style.color="#ffb3b3"; }
+    else{ r.innerHTML="Selecciona una opción primero"; r.style.color="#ffffb3"; }
+}
+function verificarLeccion3(){
+    const r=document.getElementById("resultado3");
+    if(respuestaCorrecta===1){ r.innerHTML="¡Correcto! ✅ Naranxa = Naranja"; r.style.color="#90ee90"; setTimeout(mostrarLeccion4,1200); }
+    else if(respuestaCorrecta===0){ r.innerHTML="Incorrecto ❌ Intenta de nuevo"; r.style.color="#ffb3b3"; }
+    else{ r.innerHTML="Selecciona una opción primero"; r.style.color="#ffffb3"; }
+}
+function comprobarBoxo(){
+    const v=document.getElementById("respuestaBoxo").value.trim().toLowerCase();
+    const r=document.getElementById("resultado4");
+    if(v==="cafe" || v==="café"){ r.innerHTML="¡Perfecto! ✅ Boxo = Café"; r.style.color="green"; setTimeout(mostrarLeccion5,1200); }
+    else{ r.innerHTML="Casi... la respuesta es: Café ❌"; r.style.color="red"; }
+}
+function verificarLeccion5(){
+    const r=document.getElementById("resultado5");
+    if(respuestaCorrecta===1){ r.innerHTML="¡Excelente! ✅ Naranxa = Naranja"; r.style.color="#90ee90"; setTimeout(finalizar,1200); }
+    else if(respuestaCorrecta===0){ r.innerHTML="Incorrecto ❌ Intenta de nuevo"; r.style.color="#ffb3b3"; }
+    else{ r.innerHTML="Selecciona una opción primero"; r.style.color="#ffffb3"; }
+}
+</script>
+</body>
+</html>

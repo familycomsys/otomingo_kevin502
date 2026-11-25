@@ -1,0 +1,59 @@
+body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; display: flex; color: #333; }
+
+/* Menú lateral */
+.sidebar { width: 260px; background: #fff; height: 100vh; position: fixed; top: 0; left: 0;
+    border-right: 2px solid #e5e5e5; padding: 30px 20px; box-sizing: border-box;
+    display: flex; flex-direction: column; color: #3c3c3c; font-weight: bold; font-size: 1.3rem; }
+.sidebar a.marca { color: inherit; text-decoration: none; }
+.sidebar span.lema { font-size: .75rem; color: #afafaf; letter-spacing: 1px; display: block; margin: 5px 0 30px; }
+.menu-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.btn-start { color: #4b4b4b; text-decoration: none; display: flex; align-items: center; gap: 15px;
+    padding: 12px 20px; font-size: 16px; border-radius: 12px; border: 2px solid transparent; transition: all .2s; }
+.btn-start:hover { background: #f7f7f7; border-color: #e5e5e5; }
+.btn-start.activo { background: #d61a78; color: #fff; }
+.btn-start.activo:hover { background: #940731; }
+.icon { font-size: 1.2rem; }
+.divider { height: 2px; background: #e5e5e5; margin: 15px 0; }
+
+/* Contenido */
+.main-content { margin-left: 260px; flex: 1; padding: 20px; box-sizing: border-box; }
+.pagina { max-width: 1000px; margin: 20px auto; }
+.pagina h1 { font-size: 2.2rem; color: #2c3e50; text-align: left; margin: 0 0 8px; }
+.pagina .intro { color: #555; margin: 0 0 20px; }
+
+.nota { background: #fff; border-left: 5px solid #d61a78; border-radius: 8px; padding: 14px 18px;
+    margin: 0 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,.05); color: #555; line-height: 1.5; }
+.nota strong { color: #333; }
+.pares { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.par { background: #fdf0f6; border-radius: 8px; padding: 6px 12px; font-size: .95rem; }
+.par b { color: #d61a78; }
+
+.barra-herr { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 25px 0 10px; }
+.barra-herr h2 { margin: 0; font-size: 1.3rem; color: #2c3e50; }
+.btn-practica { background: #fff; color: #d61a78; border: 2px solid #d61a78; border-radius: 10px;
+    padding: 8px 16px; font-weight: bold; cursor: pointer; font-size: .95rem; transition: all .2s; }
+.btn-practica:hover, .btn-practica.activo { background: #d61a78; color: #fff; }
+
+.grid-letras { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+.letra-card { background: #fff; border: 2px solid #e5e5e5; border-radius: 14px; padding: 18px;
+    text-align: center; transition: transform .15s, box-shadow .15s; }
+.letra-card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,.1); }
+.letra-card .letra { font-size: 3rem; font-weight: bold; color: #d61a78; line-height: 1.1; }
+.letra-card .sonido { color: #666; font-size: .9rem; margin: 8px 0 12px; min-height: 2.6em; }
+.letra-card .ejemplo { background: #f7f7f7; border-radius: 10px; padding: 10px; }
+.letra-card .palabra { font-size: 1.2rem; font-weight: bold; color: #333; display: block; }
+.letra-card .significado { color: #888; font-size: .9rem; }
+.letra-card .pendiente { color: #aaa; font-style: italic; font-size: .9rem; }
+
+/* Modo práctica: el significado se oculta hasta tocar la tarjeta */
+.practica .letra-card { cursor: pointer; }
+.practica .letra-card:not(.revelado) .significado { visibility: hidden; }
+
+.fuentes { color: #888; font-size: .85rem; margin-top: 30px; line-height: 1.5; }
+
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 2px solid #e5e5e5; }
+    .main-content { margin-left: 0; }
+    .pagina h1 { font-size: 1.7rem; }
+}

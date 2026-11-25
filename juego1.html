@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e91e63">
+<title>NTHËNI — Las salas del saber</title>
+<style>
+:root{--pink:#e91e63;--hot:#ff3d8d;--pale:#ffe4ef;--ink:#261b2b;--muted:#776a7b;--paper:#fffafd;--line:#f2c8d9;--dark:#251a30;--gold:#f2c14e;--green:#50b88a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#fff 0,#fff6fa 35%,#fce8f1 100%);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif}
+button{font:inherit;cursor:pointer;border:0}button:focus-visible{outline:3px solid #6b49c8;outline-offset:3px}
+.shell{max-width:1120px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px}.sigil{width:48px;height:48px;border-radius:16px;background:var(--pink);color:white;display:grid;place-items:center;font-size:25px;box-shadow:0 5px 0 #a8124c}.brand h1{font-size:21px;line-height:1;margin:0;letter-spacing:1px}.brand small{color:var(--muted);font-weight:700}.stats{display:flex;gap:9px;flex-wrap:wrap}.pill{background:#fff;border:1px solid var(--line);border-radius:99px;padding:9px 13px;font-weight:800;box-shadow:0 3px 0 #f4d6e2}
+.panel{background:#fff;border:2px solid var(--line);border-radius:24px;box-shadow:0 8px 0 #f1d3e0;padding:clamp(18px,3vw,30px)}
+.hero{background:linear-gradient(135deg,#fff 0%,#fff4f9 55%,#ffe0ec 100%);position:relative;overflow:hidden}.hero:after{content:"✦";position:absolute;right:25px;top:12px;font-size:100px;color:#f9c2d8;opacity:.5}.eyebrow{color:var(--pink);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}.hero h2{font-size:clamp(28px,5vw,48px);line-height:1.03;margin:10px 0}.hero p{color:var(--muted);max-width:650px;line-height:1.6}.btn{background:var(--pink);color:#fff;border-radius:14px;padding:13px 19px;font-weight:900;box-shadow:0 5px 0 #a8124c;transition:.12s}.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #a8124c}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #a8124c}.btn.secondary{background:#fff;color:var(--pink);border:2px solid var(--pink);box-shadow:0 4px 0 #f3c5d8}.btn.ghost{background:#f8edf2;color:var(--ink);box-shadow:none}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 0 12px}.section-title h3{margin:0;font-size:18px}.muted{color:var(--muted)}.difficulty{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.diff{border:2px solid var(--line);border-radius:18px;background:white;padding:16px;text-align:left;color:var(--ink);box-shadow:0 4px 0 #f5dbe5}.diff.selected{border-color:var(--pink);background:#fff1f7;box-shadow:0 4px 0 #e9a8c3}.diff b{display:block;font-size:19px}.diff span{font-size:12px;color:var(--muted);font-weight:800}.diff p{font-size:13px;line-height:1.4;margin:8px 0 0;color:#625666}
+.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:18px}.room-map{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 0}.room{aspect-ratio:1;border-radius:15px;background:#f8edf2;border:2px solid #f1d4e0;display:grid;place-items:center;font-size:22px;position:relative}.room.done{background:#ffe2ee;border-color:#f08bb5}.room.current{background:var(--pink);color:white;border-color:#a8124c;box-shadow:0 4px 0 #a8124c}.room small{position:absolute;bottom:5px;font-size:9px;font-weight:900}.bar{height:10px;background:#f7e4ec;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),#ff8db9);width:0;transition:.3s}
+.game{background:linear-gradient(180deg,#30223a,#21182a);color:white;border:2px solid #59435f;box-shadow:0 8px 0 #17101d}.game .muted{color:#c7b8cc}.game .section-title h3{color:white}.arena{min-height:170px;border-radius:18px;background:radial-gradient(circle at 50% 35%,#60405c,#38253f 70%);display:grid;place-items:center;text-align:center;padding:18px;position:relative;overflow:hidden}.monster{font-size:65px;filter:drop-shadow(0 8px 0 #1a1220);animation:bob 2s infinite ease-in-out}.monster-name{font-weight:900;color:#ffd8e8}.question{font-size:clamp(20px,3vw,27px);font-weight:900;text-align:center;margin:20px 0 6px}.hint{text-align:center;color:#bfaec5;font-size:13px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.answer{background:#fff;color:var(--ink);border:2px solid #e9d8e6;border-radius:13px;padding:14px 10px;font-weight:900;min-height:54px}.answer:hover{border-color:var(--hot);background:#fff2f7}.answer.correct{background:#d9f8e9;border-color:#50b88a}.answer.wrong{background:#ffe1e7;border-color:#e65b78}.feedback{min-height:45px;text-align:center;padding:12px 4px;color:#ffd5e5;font-weight:800}.hearts{color:#ff7aa9;letter-spacing:3px}.side-list{display:grid;gap:10px}.item{display:flex;gap:12px;align-items:center;background:#fff6fa;border:1px solid var(--line);padding:11px;border-radius:14px}.item .emoji{font-size:25px}.item b{display:block}.rarity{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px}.common{color:#7d7180}.rare{color:#3477bd}.epic{color:#9251bd}.legendary{color:#c18a12}
+.overlay{position:fixed;inset:0;background:#211629b8;display:none;align-items:center;justify-content:center;padding:16px;z-index:5}.overlay.show{display:flex}.modal{width:min(620px,100%);max-height:90vh;overflow:auto;background:#fffafd;border:3px solid var(--pink);border-radius:24px;padding:22px;box-shadow:0 12px 0 #9d174b}.modal h2{margin:0 0 8px}.shop-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0}.shop-card{background:#fff;border:2px solid var(--line);border-radius:15px;padding:13px}.shop-card .emoji{font-size:28px}.shop-card h4{margin:6px 0}.shop-card p{font-size:12px;color:var(--muted);min-height:34px}.shop-card button{width:100%;padding:9px;border-radius:10px;background:var(--pink);color:white;font-weight:900}.shop-card button:disabled{background:#d9cbd2}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#2b1d31;color:white;padding:12px 18px;border-radius:12px;display:none;z-index:8;font-weight:800}
+footer{text-align:center;color:#8b7b8c;font-size:11px;padding:24px 8px}
+@keyframes bob{50%{transform:translateY(-8px)}}@media(max-width:760px){.layout{grid-template-columns:1fr}.difficulty{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.stats{width:100%}.room-map{gap:5px}.room{border-radius:10px}.answers{grid-template-columns:1fr}.hero:after{font-size:70px;right:8px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+    <div class="brand"><div class="sigil">✦</div><div><h1>NTHËNI</h1><small>LAS SALAS DEL SABER</small></div></div>
+    <div class="stats"><div class="pill">🪙 <span id="coins">0</span></div><div class="pill">♥ <span id="lives">3</span></div><div class="pill">✧ <span id="relicCount">0</span></div></div>
+</header>
+<main>
+<section class="panel hero" id="intro">
+    <div class="eyebrow">Una aventura de palabras · Otomí del Estado de México</div>
+    <h2>Entra a la<br><span style="color:var(--pink)">mazmorra del saber.</span></h2>
+    <p>Explora salas, aprende palabras hñähñu, reúne monedas y encuentra reliquias. Cada respuesta correcta te acerca al guardián de la zona. ¡No necesitas experiencia previa!</p>
+    <div class="section-title"><h3>Elige tu dificultad</h3><span class="muted" style="font-size:12px">Puedes cambiarla al iniciar otra partida</span></div>
+    <div class="difficulty">
+        <button class="diff selected" data-diff="hei"><b>Hei</b><span>CASUAL</span><p>Más corazones, pistas y ritmo tranquilo.</p></button>
+        <button class="diff" data-diff="xifi"><b>Xifi</b><span>ESTÁNDAR</span><p>Un reto equilibrado para practicar.</p></button>
+        <button class="diff" data-diff="entsase"><b>Ëntsäse</b><span>DIFÍCIL</span><p>Menos margen de error y sin pistas.</p></button>
+    </div>
+        <button class="btn" id="start">Comenzar expedición ✦</button>
+</section>
+<div class="layout" id="play" hidden>
+    <section class="panel game">
+        <div class="section-title"><h3 id="zoneTitle">Zona 1 · El umbral rosado</h3><span class="muted" id="roomLabel">Sala 1/5</span></div>
+        <div class="bar"><i id="progress"></i></div>
+        <div class="arena"><div><div class="monster" id="monster">👾</div><div class="monster-name" id="enemyName">Duendecillo del eco</div></div></div>
+        <div class="question" id="question">¿Qué significa “Deje”?</div>
+        <div class="hint" id="hint">Elige la respuesta correcta.</div>
+        <div class="answers" id="answers"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <span class="hearts" id="heartDisplay">♥ ♥ ♥</span><button class="btn ghost" id="quit">Salir de la expedición</button>
+    </div>
+    </section>
+    <aside>
+    <section class="panel">
+        <div class="section-title"><h3>Mapa de la zona</h3><span class="eyebrow" id="zoneCount">01 / ∞</span></div>
+        <div class="room-map" id="map"></div>
+        <p class="muted" style="font-size:13px;line-height:1.5">Supera cinco salas para llegar a la tienda y prepararte para el jefe.</p>
+    </section>
+    <section class="panel" style="margin-top:16px">
+        <div class="section-title"><h3>Tus reliquias</h3><span class="muted" id="relicLabel">0 equipadas</span></div>
+        <div class="side-list" id="relics"><p class="muted" style="font-size:13px">Aún no encuentras reliquias.</p></div>
+    </section>
+    </aside>
+</div>
+</main>
+<footer>Prototipo educativo · Las palabras pueden presentar variaciones locales. Consulta y valida el vocabulario con hablantes de la variante correspondiente.</footer>
+</div>
+<div class="overlay" id="modal"><div class="modal" id="modalContent"></div></div><div class="toast" id="toast"></div>
+<script>
+const vocab=[
+    {w:"Deje",m:"Agua",opts:["Agua","Fuego","Casa","Camino"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Tsindeta",m:"Abuelito",opts:["Hermana","Abuelito","Amigo","Niño"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Xoborokue",m:"Agotado",opts:["Contento","Agotado","Rápido","Pequeño"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Thexakjä",m:"Ahijado",opts:["Ahijado","Maestro","Abuelo","Vecino"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Tziuene",m:"Bebé pequeño",opts:["Flor","Bebé pequeño","Pájaro","Lluvia"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Tzutane",m:"Besos",opts:["Besos","Manos","Ojos","Sueños"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Ne",m:"Boca",opts:["Cabeza","Boca","Pierna","Cuello"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Ña",m:"Cabeza",opts:["Cabeza","Agua","Boca","Casa"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Yuga",m:"Cuello",opts:["Cuello","Pie","Brazo","Cabeza"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Guade",m:"Gallina",opts:["Perro","Gallina","Gato","Caballo"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Xinthe",m:"Pierna",opts:["Mano","Pierna","Ojo","Cuello"],note:"Palabra registrada por CEDIPIEM."},
+    {w:"Xachki",m:"Cepillar",opts:["Cantar","Cepillar","Caminar","Dormir"],note:"Palabra registrada por CEDIPIEM."}
+];
+const relicPool=[
+    {name:"Gota de Deje",emoji:"💧",rarity:"common",desc:"Ganas 2 monedas extra por respuesta correcta.",effect:"coin",price:12},
+    {name:"Corazón de Tziuene",emoji:"💗",rarity:"rare",desc:"Recupera un corazón al obtenerla.",effect:"heal",price:18},
+    {name:"Lente de Ña",emoji:"🔮",rarity:"epic",desc:"Revela una pista en cada sala.",effect:"hint",price:24},
+    {name:"Corona de Tsindeta",emoji:"👑",rarity:"legendary",desc:"Comienzas cada zona con 8 monedas extra.",effect:"bonus",price:32},
+    {name:"Pluma de Guade",emoji:"🪶",rarity:"rare",desc:"Una respuesta incorrecta no resta vida una vez por zona.",effect:"shield",price:20},
+    {name:"Amuleto de Ne",emoji:"🧿",rarity:"common",desc:"Ganas un corazón máximo adicional.",effect:"heart",price:15}
+];
+let diff="hei",zone=1,room=0,coins=0,lives=3,maxLives=3,run=false,answered=false,questionNow=null,relics=[],freeClaimed=0,shieldUsed=false,zoneCorrect=0,seen=[],boss=false;
+const $=id=>document.getElementById(id);
+document.querySelectorAll(".diff").forEach(b=>b.onclick=()=>{diff=b.dataset.diff;document.querySelectorAll(".diff").forEach(x=>x.classList.toggle("selected",x===b))});
+function updateStats(){$("coins").textContent=coins;$("lives").textContent=lives;$("relicCount").textContent=relics.length;$("heartDisplay").textContent="♥ ".repeat(lives)+"♡ ".repeat(Math.max(0,maxLives-lives));$("relicLabel").textContent=relics.length+" equipadas"}
+function toast(t){$("toast").textContent=t;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",1800)}
+function start(){zone=1;room=0;coins=10;lives=diff==="hei"?5:diff==="xifi"?4:3;maxLives=lives;relics=[];freeClaimed=0;shieldUsed=false;run=true;$("intro").hidden=true;$("play").hidden=false;updateStats();beginRoom()}
+$("start").onclick=start;
+function renderMap(){$("map").innerHTML="";for(let i=0;i<5;i++){let d=document.createElement("div");d.className="room "+(i<room?"done":i===room?"current":"");d.innerHTML=(i<room?"✓":i===room?"✦":"?")+`<small>${i+1}</small>`;$("map").append(d)}$("progress").style.width=(room/5*100)+"%";$("roomLabel").textContent="Sala "+Math.min(room+1,5)+"/5";$("zoneCount").textContent=String(zone).padStart(2,"0")+" / ∞"}
+function beginRoom(){boss=false;answered=false;renderMap();$("zoneTitle").textContent="Zona "+zone+" · "+(["El umbral rosado","Galería de ecos","Jardín de piedra","Cripta de los nombres"][(zone-1)%4]);$("monster").textContent=["👾","🦇","🕷️","👻","🐸"][(room+zone)%5];$("enemyName").textContent=["Duendecillo del eco","Murciélago parlante","Araña de sílabas","Fantasma distraído","Sapo guardián"][(room+zone)%5];nextQuestion()}
+function nextQuestion(){let pool=vocab.filter(v=>!seen.includes(v.w));if(!pool.length){seen=[];pool=vocab}questionNow=pool[Math.floor(Math.random()*pool.length)];seen.push(questionNow.w);$("question").textContent="¿Qué significa “"+questionNow.w+"”?";$("hint").textContent=diff==="entsase"?"Sin pistas: confía en lo que has aprendido.":"Elige la traducción correcta.";let opts=[...questionNow.opts].sort(()=>Math.random()-.5);$("answers").innerHTML="";opts.forEach(o=>{let b=document.createElement("button");b.className="answer";b.textContent=o;b.onclick=()=>answer(b,o);$("answers").append(b)});if(diff!=="entsase"&&relics.some(r=>r.effect==="hint"))$("hint").textContent="Pista: la palabra tiene "+questionNow.m.length+" letras en español."}
+function answer(btn,choice){if(answered)return;answered=true;let ok=choice===questionNow.m;document.querySelectorAll(".answer").forEach(b=>{b.disabled=true;if(b.textContent===questionNow.m)b.classList.add("correct")});if(ok){zoneCorrect++;let gain=diff==="hei"?7:diff==="xifi"?6:5;if(relics.some(r=>r.effect==="coin"))gain+=2;coins+=gain;$("feedback").textContent="¡Correcto! +"+gain+" monedas · "+questionNow.w+" = "+questionNow.m;btn.classList.add("correct")}else{btn.classList.add("wrong");if(relics.some(r=>r.effect==="shield")&&!shieldUsed){shieldUsed=true;$("feedback").textContent="La reliquia te protegió. La respuesta era "+questionNow.m+"."}else{lives--;$("feedback").textContent="Casi. La respuesta es "+questionNow.m+"."}}updateStats();setTimeout(()=>{if(lives<=0){endRun(false);return}room++;if(room<5){beginRoom()}else{openShop()}},1250)}
+function openShop(){renderMap();$("roomLabel").textContent="Tienda · Antes del jefe";$("zoneTitle").textContent="Zona "+zone+" · Tienda de reliquias";$("monster").textContent="🛍️";$("enemyName").textContent="Mercader de los ecos";$("question").textContent="Prepara tu equipo para el guardián";$("hint").textContent="Dos regalos gratuitos por zona. Después, compra con tus monedas."; $("answers").innerHTML="";$("feedback").textContent="Monedas disponibles: "+coins;
+let picks=[...relicPool].sort(()=>Math.random()-.5).slice(0,4);
+let freeA=relicPool[(zone*2)%relicPool.length],freeB=relicPool[(zone*2+1)%relicPool.length];
+let html=`<div class="eyebrow">Regalos de la zona</div><div class="shop-grid">${[freeA,freeB].map((r,i)=>shopCard(r,true,"free"+i)).join("")}</div><div class="eyebrow">Mercancía</div><div class="shop-grid">${picks.map((r,i)=>shopCard(r,false,"buy"+i)).join("")}</div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="bossGo">Enfrentar al jefe →</button><button class="btn secondary" id="skipShop">Continuar sin comprar</button></div>`;
+showModal("Mercado de las reliquias",html);
+$("bossGo").onclick=()=>{closeModal();startBoss()};$("skipShop").onclick=()=>{closeModal();startBoss()};
+}
+function shopCard(r,free,id){return `<div class="shop-card"><div class="emoji">${r.emoji}</div><div class="rarity ${r.rarity}">${r.rarity==="common"?"Común":r.rarity==="rare"?"Rara":r.rarity==="epic"?"Épica":"Legendaria"} ${free?"· GRATIS":""}</div><h4>${r.name}</h4><p>${r.desc}</p><button data-item="${r.name}" data-free="${free}">${free?"Reclamar regalo":"🪙 "+r.price+" · Comprar"}</button></div>`}
+function showModal(title,body){$("modalContent").innerHTML=`<h2>${title}</h2>${body}`;$("modal").classList.add("show");$("modalContent").querySelectorAll("[data-item]").forEach(b=>b.onclick=()=>{let r=relicPool.find(x=>x.name===b.dataset.item);let free=b.dataset.free==="true";if(free){if(relics.some(x=>x.name===r.name)){toast("Ya reclamaste este objeto.");return}}else{if(coins<r.price){toast("No tienes suficientes monedas.");return}coins-=r.price}addRelic(r);b.disabled=true;b.textContent="Obtenida ✓";updateStats();$("feedback").textContent="Reliquia obtenida: "+r.name})}
+function closeModal(){$("modal").classList.remove("show")}
+function addRelic(r){relics.push(r);if(r.effect==="heal"&&lives<maxLives)lives++;if(r.effect==="heart"){maxLives++;lives++}updateStats();renderRelics()}
+function renderRelics(){$("relics").innerHTML=relics.length?relics.map(r=>`<div class="item"><span class="emoji">${r.emoji}</span><div><b>${r.name}</b><small class="muted">${r.desc}</small></div></div>`).join(""):'<p class="muted" style="font-size:13px">Aún no encuentras reliquias.</p>'}
+function startBoss(){boss=true;answered=false;$("roomLabel").textContent="Jefe · Zona "+zone;$("monster").textContent="🐲";$("enemyName").textContent="El Guardián de las palabras";$("question").textContent="Reto del guardián: ¿qué significa “"+vocab[(zone+room)%vocab.length].w+"”?";questionNow=vocab[(zone+room)%vocab.length];$("hint").textContent="Responde correctamente para sellar la zona.";let opts=[...questionNow.opts].sort(()=>Math.random()-.5);$("answers").innerHTML="";opts.forEach(o=>{let b=document.createElement("button");b.className="answer";b.textContent=o;b.onclick=()=>bossAnswer(b,o);$("answers").append(b)});$("feedback").textContent="♥ "+lives+" · El jefe solo necesita una respuesta correcta."}
+function bossAnswer(btn,o){if(answered)return;answered=true;let ok=o===questionNow.m;document.querySelectorAll(".answer").forEach(b=>{b.disabled=true;if(b.textContent===questionNow.m)b.classList.add("correct")});if(ok){coins+=15;$("feedback").textContent="¡Jefe derrotado! +15 monedas. Zona completada."}else{lives--;$("feedback").textContent="El guardián resiste. La respuesta era "+questionNow.m+"."}updateStats();setTimeout(()=>{if(lives<=0){endRun(false)}else if(ok){endRun(true)}else{answered=false;startBoss()}},1300)}
+function endRun(win){if(win){showModal("¡Zona superada! ✨",`<p>Has completado la zona ${zone} y derrotado al guardián.</p><p><b>+15 monedas</b> · Aciertos en salas: ${zoneCorrect}</p><p class="muted">Tu expedición puede continuar en una nueva zona con mayor desafío.</p><button class="btn" id="nextZone">Explorar la siguiente zona →</button> <button class="btn secondary" id="finish">Terminar expedición</button>`);$("nextZone").onclick=()=>{closeModal();zone++;room=0;zoneCorrect=0;freeClaimed=0;shieldUsed=false;if(relics.some(r=>r.effect==="bonus"))coins+=8;beginRoom()};$("finish").onclick=()=>{closeModal();returnHome(true)}}else{showModal("La expedición termina aquí",`<p>Has llegado hasta la zona ${zone}. ¡Cada intento te deja nuevas palabras!</p><p><b>Monedas reunidas:</b> ${coins}</p><button class="btn" id="again">Volver a intentarlo</button> <button class="btn secondary" id="home">Volver al inicio</button>`);$("again").onclick=()=>{closeModal();start()};$("home").onclick=()=>{closeModal();returnHome(false)}}}
+function returnHome(keep){run=false;$("play").hidden=true;$("intro").hidden=false;if(keep)toast("¡Gran expedición!");}
+$("quit").onclick=()=>{if(confirm("¿Salir de la expedición? Se perderá el progreso de esta partida."))returnHome(false)};
+</script>
+</body></html>

@@ -1,0 +1,134 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #34495e;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.grid-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.384);
+}
+
+.btn-accept {
+    background: linear-gradient(135deg, #cc2ea4, #ae273d);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(204, 46, 112, 0.2);
+    width: 100%;
+    margin-top: 25px;
+}
+
+.btn-accept:hover {
+    background: linear-gradient(135deg, #ff65f7, #cc2ea4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(204, 46, 107, 0.4);
+}
+
+.btn-accept:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(204, 46, 99, 0.2);
+}
+
+.btn-saltar {
+    background: linear-gradient(135deg, #cc2ea4, #ae273d);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(204, 46, 112, 0.2);
+    width: 100%;
+    margin-top: 25px;
+}
+
+.btn-saltar:hover {
+    background: linear-gradient(135deg, #ff65f7, #cc2ea4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(204, 46, 107, 0.4);
+}
+
+.btn-saltar:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(204, 46, 99, 0.2);
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center; /* Centra el botón y los textos */
+}
+
+/* Evita que las imágenes sean más grandes que la tarjeta */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain; /* Mantiene la proporción sin cortar la imagen */
+    margin-bottom: 15px;
+}
+
+/* Ajusta el reproductor de audio al ancho de la tarjeta */
+.card audio {
+    width: 100%;
+}
+.card {
+    cursor: pointer;
+    border: 3px solid transparent; /* Reserva espacio para el borde al seleccionar */
+}
+
+/* Estilo visual cuando una tarjeta está elegida */
+.card.seleccionada {
+    border-color: #cc2ea4;
+    background-color: #fff0fa;
+    transform: translateY(-5px);
+}

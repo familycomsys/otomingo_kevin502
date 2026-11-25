@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECO DE DOS MUNDOS — Hñähñu RPG</title>
+<style>
+:root{--pink:#ff4f9a;--hot:#ff79b5;--cream:#fff4dc;--ink:#080711;--panel:#171426;--purple:#6c4b91;--cyan:#83f5e8;--gold:#ffe28a;--muted:#b9aecb}
+*{box-sizing:border-box}html{background:#090813}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0,#322143 0,#100d1d 48%,#080711 100%);color:var(--cream);font-family:'Courier New',monospace;font-size:22px;display:flex;justify-content:center;padding:22px 12px}
+button{font:inherit;color:var(--cream);background:#211b31;border:2px solid #a78abd;padding:9px 12px;cursor:pointer;box-shadow:inset 0 -3px #080711;transition:.12s}button:hover,button:focus-visible{color:#fff;background:#49305c;border-color:var(--hot);transform:translateY(-1px);outline:none}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+#cabinet{width:min(980px,100%);border:4px solid var(--pink);background:#100e1b;box-shadow:0 0 0 4px #392647,0 20px 70px #000b;padding:clamp(10px,2.5vw,22px);position:relative}
+#cabinet:before{content:"✦  ✧  ✦  ✧  ✦  ✧  ✦";position:absolute;top:-18px;left:16px;background:#100e1b;color:var(--pink);font-size:16px;letter-spacing:6px;padding:0 8px}
+header{text-align:center;margin:4px 0 14px}h1{font:clamp(18px,3vw,28px)/1.5 'Courier New',monospace;color:#ff9cc9;text-shadow:3px 3px #633c83;margin:8px 0}header p{margin:0;color:#cbb9df;letter-spacing:3px;font-size:18px}
+#screen{min-height:590px;border:3px double #9875b1;background:linear-gradient(180deg,#1b172b,#100e1b);padding:clamp(10px,2vw,18px);position:relative;overflow:hidden}
+.scene{display:none}.scene.active{display:block}.center{text-align:center}.pixel-title{font:12px/1.8 'Courier New',monospace;color:var(--hot);text-align:center}.story{font-size:25px;line-height:1.2;max-width:760px;margin:16px auto;color:#f3e9fa}.tiny{font-size:17px;color:#bfb1d1;line-height:1.15}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:16px 0}.hero-art{height:185px;display:grid;place-items:center;position:relative;background:repeating-linear-gradient(135deg,#21182f 0 12px,#261c36 12px 24px);border:2px solid #72548a;margin:16px 0;overflow:hidden}.hero-art:before,.hero-art:after{content:"✦";position:absolute;color:#ff8bbd;font-size:48px;opacity:.6}.hero-art:before{left:12%;top:20%}.hero-art:after{right:13%;bottom:10%}.moon{font-size:86px;filter:drop-shadow(0 0 16px #ff77b7)}
+#hud{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-bottom:1px solid #59446c;padding:0 0 9px;font-size:19px;color:#e7d9f2}.meter{height:13px;background:#342b43;border:1px solid #88729b;overflow:hidden}.meter>i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4f9a,#ffb1d2);transition:width .2s}.meter.tp>i{background:linear-gradient(90deg,#49b9ca,#a0fff1)}.meterline{display:flex;align-items:center;gap:7px;margin:7px 0;font-size:17px}.meterline span{width:45px}.enemy-head{display:flex;align-items:center;justify-content:center;gap:20px;min-height:145px;padding:10px 0}.enemy-emoji{font-size:76px;filter:drop-shadow(0 0 10px #ff76b2);animation:bob 2s ease-in-out infinite}.enemy-info{text-align:left}.enemy-name{font:11px/1.8 'Courier New',monospace;color:#ffabd0}.enemy-sub{color:#bfb1d1;font-size:18px}.zone-label{color:var(--cyan);font-size:17px;letter-spacing:2px}.dialogue{border:2px solid #8b73a0;background:#100e1a;min-height:72px;padding:10px 13px;line-height:1.15;margin:8px 0 12px}.battle-menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.action-btn{min-height:58px;border:2px solid var(--pink);background:#21182c;text-align:center}.action-btn .otomi{display:block;color:#ff9fc8;font:10px 'Courier New',monospace;margin-bottom:7px}.action-btn .es{display:block;font-size:17px;color:#fff0f6}.subtranslation{display:block;font-size:14px;color:#b9aecb;margin-top:3px}.battle-menu button:nth-child(2){border-color:#9f83d6}.battle-menu button:nth-child(3){border-color:#71cfc7}.battle-menu button:nth-child(4){border-color:#e4c47d}
+#submenu{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:10px}.option{display:block;width:100%;text-align:left;padding:8px 10px}.option b{display:block;color:#ffadd0;font-size:21px}.option small{display:block;color:#c0b4d0;font-size:15px}.battlefield{height:230px;max-width:570px;margin:12px auto;border:3px solid #eee0ff;background:radial-gradient(ellipse at center,#1e1830,#080711 75%);position:relative;overflow:hidden;touch-action:none;box-shadow:0 0 0 3px #443252,inset 0 0 30px #000}.battlefield:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 24px,#ffffff08 25px),repeating-linear-gradient(90deg,transparent 0 24px,#ffffff08 25px);pointer-events:none}.soul{position:absolute;width:15px;height:15px;left:50%;top:76%;transform:translate(-50%,-50%) rotate(45deg);background:#ff426e;box-shadow:0 0 6px 3px #ff386d,0 0 17px #ff386d;z-index:3}.soul:before,.soul:after{content:"";position:absolute;width:15px;height:15px;background:#ff426e;border-radius:50%}.soul:before{left:-8px}.soul:after{top:-8px}.soul.shield{background:#9ff9ed;box-shadow:0 0 10px #9ff9ed}.soul.shield:before,.soul.shield:after{background:#9ff9ed}.bullet{position:absolute;z-index:2;width:12px;height:12px;background:#f5e8ff;border:2px solid #ff79b5;box-shadow:0 0 9px #ff79b5;transform:rotate(45deg)}.bullet.orb{border-radius:50%;transform:none;background:#8df6eb;border-color:#d6fffa;box-shadow:0 0 10px #69e9dd}.bullet.gold{background:#ffe28a;border-color:#fff2c7;box-shadow:0 0 9px #ffe28a}.battle-hint{text-align:center;color:#bfb1d1;font-size:17px;margin:4px}.battle-bottom{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.bar-label{font-size:16px;color:#cbb9df}.enemybar{width:150px;display:inline-block;vertical-align:middle}.enemybar i{background:linear-gradient(90deg,#c55e91,#ffadd0)}
+#gameover{position:absolute;inset:0;background:#05040a;z-index:20;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px}#gameover.show{display:flex}#gameover h2{font:clamp(22px,5vw,44px) 'Courier New',monospace;color:#ff527a;text-shadow:4px 4px #5c142e;margin:12px 0 22px}.broken{font-size:54px;color:#ff426e;filter:drop-shadow(0 0 12px #ff244d);animation:crack .55s steps(2) infinite alternate}.gameover-copy{max-width:520px;font-size:26px;line-height:1.15;color:#d8c9e4;margin:12px}.ending-card{border:2px solid #9b7bb5;background:#191426;padding:18px;text-align:center;margin:18px auto;max-width:680px}.ending-card h2{font:13px/1.8 'Courier New';color:#ff9dc9}.codex{border-top:1px dashed #604c72;margin-top:18px;padding-top:10px;color:#a99ab9;font-size:16px}.footer{text-align:center;color:#806f9b;font-size:15px;margin-top:12px}
+@keyframes bob{50%{transform:translateY(-8px)}}@keyframes crack{to{transform:scale(.88) rotate(-8deg);opacity:.65}}
+@media(max-width:600px){body{padding:12px 6px}#screen{min-height:620px}.battle-menu{grid-template-columns:repeat(2,1fr)}.enemy-head{min-height:125px}.enemy-emoji{font-size:60px}.battlefield{height:210px}.story{font-size:22px}}
+</style>
+</head>
+<body>
+<div id="cabinet">
+<header><h1>ECO DE DOS MUNDOS</h1><p>UN RPG PEQUEÑO ENTRE DOS REALIDADES</p></header>
+<div id="screen">
+<section id="title" class="scene active">
+ <div class="hero-art"><div class="moon">☾</div></div>
+ <div class="pixel-title">[ EL ECO TE ESTÁ LLAMANDO ]</div>
+ <p class="story center">En el borde de un pueblo olvidado, una grieta conecta dos mundos. Algo al otro lado conoce tu nombre. Y parece necesitar ayuda.</p>
+ <p class="tiny center">Explora tres zonas · Conoce criaturas · Esquiva patrones · Decide cómo termina la historia.</p>
+ <div class="actions"><button onclick="newGame()">▶ COMENZAR</button><button onclick="showScene('guide')">CONTROLES / GUÍA</button></div>
+ <p class="tiny center">El vocabulario hñähñu aparece durante la aventura con su significado en español.</p>
+</section>
+<section id="guide" class="scene">
+ <div class="pixel-title">CÓMO JUGAR</div>
+ <p class="story">En tu turno puedes atacar, hablar con la criatura, usar un objeto o intentar perdonarla. Los ACTOS consumen TP y aumentan la PIEDAD. Los ataques especiales también gastan TP.</p>
+ <p class="story">En el turno enemigo, mueve el corazón rojo con <b>WASD</b>, flechas o arrastrándolo con el dedo. Sobrevive hasta que termine el patrón.</p>
+ <p class="tiny">El TP se obtiene al esquivar cerca de los proyectiles y al realizar ACTOS. Una criatura con suficiente PIEDAD puede ser perdonada.</p>
+ <div class="actions"><button onclick="showScene('title')">VOLVER</button></div>
+</section>
+<section id="game" class="scene">
+ <div id="hud"><span id="zoneName">ZONA 1 · EL SENDERO VELADO</span><span>NOX · NV. 1</span><span>♥ <b id="hpText">24</b>/24</span><span>TP <b id="tpText">0</b>%</span></div>
+ <div class="meterline"><span>VIT</span><div class="meter" style="flex:1"><i id="hpBar"></i></div><b id="hpSmall">24</b></div>
+ <div class="meterline"><span>TP</span><div class="meter tp" style="flex:1"><i id="tpBar" style="width:0%"></i></div><b id="tpSmall">0%</b></div>
+ <div class="enemy-head"><div class="enemy-emoji" id="enemyArt">🕯️</div><div class="enemy-info"><div class="zone-label" id="encounterType">ENCUENTRO</div><div class="enemy-name" id="enemyName">LUMBRE ERRANTE</div><div class="enemy-sub" id="enemyOtomi">Xoborokue · agotado</div><div class="bar-label">VIT <span class="enemybar meter"><i id="enemyBar"></i></span></div></div></div>
+ <div class="dialogue" id="dialogue">Una lucecita flota frente a ti. Parece asustada.</div>
+ <div id="mainMenu" class="battle-menu">
+  <button class="action-btn" onclick="choose('fight')"><span class="otomi">TUHNI*</span><span class="es">FIGHT</span><small class="subtranslation">Pelear</small></button>
+  <button class="action-btn" onclick="choose('act')"><span class="otomi">ENÄ*</span><span class="es">ACT</span><small class="subtranslation">Hablar / decir</small></button>
+  <button class="action-btn" onclick="choose('item')"><span class="otomi">DEJE*</span><span class="es">ITEM</span><small class="subtranslation">Objeto / agua</small></button>
+  <button class="action-btn" onclick="choose('mercy')"><span class="otomi">PUNI*</span><span class="es">MERCY</span><small class="subtranslation">Perdonar</small></button>
+ </div>
+ <div id="submenu" hidden></div>
+ <div id="dodgePanel" hidden><div class="battlefield" id="arena"><div class="soul" id="soul"></div></div><p class="battle-hint" id="patternHint">¡Esquiva!</p><div class="battle-bottom"><span class="tiny">ALMA ♥ <b id="dodgeTimer">7</b>s</span><button onclick="finishDodge()">TERMINAR TURNO</button></div></div>
+ <div class="codex" id="vocabLine">* Algunas etiquetas de comandos son formas de referencia de otras variantes hñähñu; consulta la nota lingüística al final.</div>
+</section>
+<section id="ending" class="scene"><div class="ending-card"><div class="moon">✧</div><h2 id="endingTitle">EL ECO CONTINÚA</h2><p class="story" id="endingText"></p><p class="tiny" id="endingNote"></p></div><div class="actions"><button onclick="newGame()">VOLVER A JUGAR</button><button onclick="showScene('title')">MENÚ PRINCIPAL</button></div></section>
+<div id="gameover"><h2>GAME OVER</h2><div class="broken gameover-soul">💔</div><div class="gameover-copy" id="gameoverText">Tu luz aún puede encontrar el camino de regreso. No te rindas.</div><div class="actions"><button onclick="newGame()">↻ REINTENTAR</button><button onclick="showScene('title')">SALIR</button></div></div>
+</div><div class="footer">ECO DE DOS MUNDOS · HECHO PARA JUGARSE EN EL NAVEGADOR</div>
+</div>
+<!-- Reemplaza estos tres archivos por tus audios. Los dos temas de batalla se repiten en loop. -->
+<audio id="normalMusic" src="audio/combate-normal.mp3" loop preload="none"></audio>
+<audio id="bossMusic" src="audio/combate-jefe.mp3" loop preload="none"></audio>
+<audio id="gameoverMusic" src="audio/game-over.mp3" preload="none"></audio>
+<script>
+const $=id=>document.getElementById(id);
+const zones=[
+ {name:'ZONA 1 · EL SENDERO VELADO',boss:{name:'GUARDIÁN DEL UMBRAL',otomi:'Tsindeta',meaning:'abuelito (nombre simbólico)',art:'🦉',hp:58,pattern:'spiral'},enemies:[
+  {name:'LUMBRE ERRANTE',otomi:'Deje',meaning:'agua',art:'🕯️',hp:25,pattern:'rain'},
+  {name:'POLILLA DE CENIZA',otomi:'Xoborokue',meaning:'agotado',art:'🦋',hp:28,pattern:'sweep'},
+  {name:'BOCÓN DE RAÍZ',otomi:'Ne',meaning:'boca',art:'🌱',hp:30,pattern:'aim'}]},
+ {name:'ZONA 2 · EL BOSQUE QUE SUSURRA',boss:{name:'LA MATRIARCA DEL ECO',otomi:'Ña',meaning:'cabeza (nombre simbólico)',art:'🕸️',hp:72,pattern:'cross'},enemies:[
+  {name:'GALLINA DE HUMO',otomi:'Guade',meaning:'gallina',art:'🐓',hp:32,pattern:'rain'},
+  {name:'BEBÉ DE MUSGO',otomi:'Tziuene',meaning:'bebé pequeño',art:'🍄',hp:34,pattern:'spiral'},
+  {name:'PIERNA ERRANTE',otomi:'Xinthe',meaning:'pierna',art:'🦵',hp:36,pattern:'sweep'}]},
+ {name:'ZONA 3 · EL ESPEJO HUNDIDO',boss:{name:'EL CORAZÓN SIN ECO',otomi:'Yuga',meaning:'cuello (nombre simbólico)',art:'💠',hp:88,pattern:'final'},enemies:[
+  {name:'EL CEPILLADOR',otomi:'Xachki',meaning:'cepillar',art:'🪮',hp:38,pattern:'aim'},
+  {name:'BESO DE CRISTAL',otomi:'Tzutane',meaning:'besos',art:'💋',hp:40,pattern:'cross'},
+  {name:'AHIJADO DE NIEBLA',otomi:'Thexakjä',meaning:'ahijado',art:'👻',hp:42,pattern:'rain'}]}
+];
+const actData={
+ talk:{name:'ENÄ* · HABLAR',desc:'Hablar con calma',cost:8,mercy:24,text:'Escuchas sin interrumpir. La criatura baja la guardia.'},
+ encourage:{name:'HOGA MFENI* · BUEN PENSAMIENTO',desc:'Dar ánimo',cost:12,mercy:32,text:'Le recuerdas que no tiene que enfrentarse a todo en soledad.'},
+ share:{name:'XE̱PI* · COMPARTIR',desc:'Compartir energía',cost:15,mercy:38,text:'Compartes una chispa de tu luz. La criatura parece comprender.'}
+};
+let hp=24,tp=0,zoneIndex=0,encounterIndex=0,enemy=null,enemyHp=0,mercyPct=0,violent=0,turnBusy=false,bullets=[],raf=0,spawnTimer=0,clock=null,timeLeft=7,heart={x:50,y:76},keys={},patternCount=0,gameEnded=false;
+const normal=$('normalMusic'),boss=$('bossMusic'),over=$('gameoverMusic');
+function showScene(id){document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');$('gameover').classList.remove('show');if(id==='title'){over.pause();stopMusic();}}
+function playMusic(which){normal.pause();boss.pause();if(which==='boss'){boss.currentTime=0;boss.play().catch(()=>{});}else if(which==='normal'){normal.currentTime=0;normal.play().catch(()=>{});}}
+function stopMusic(){normal.pause();boss.pause();}
+function updateHud(){ $('hpText').textContent=hp;$('hpSmall').textContent=hp;$('hpBar').style.width=(hp/24*100)+'%';$('tpText').textContent=tp;$('tpSmall').textContent=tp+'%';$('tpBar').style.width=tp+'%'; }
+function newGame(){stopDodge();stopMusic();over.pause();hp=24;tp=0;zoneIndex=0;encounterIndex=0;violent=0;gameEnded=false;startEncounter();showScene('game');$('mainMenu').hidden=false;$('submenu').hidden=true;$('dodgePanel').hidden=true;updateHud();}
+function startEncounter(){const z=zones[zoneIndex];$('zoneName').textContent=z.name;let isBoss=encounterIndex===3;enemy=isBoss?z.boss:z.enemies[(encounterIndex+zoneIndex)%z.enemies.length];enemyHp=enemy.hp;mercyPct=0;enemy.usedHeal=false;$('enemyArt').textContent=enemy.art;$('enemyName').textContent=enemy.name;$('enemyOtomi').textContent=enemy.otomi+' · '+enemy.meaning;$('encounterType').textContent=isBoss?'JEFE DE ZONA':'ENCUENTRO';$('enemyBar').style.width='100%';$('dialogue').textContent=isBoss?'Una presencia enorme bloquea el camino. El aire vibra a su alrededor.':'Una criatura aparece entre los ecos. No parece saber si huir o atacar.';$('mainMenu').hidden=false;$('submenu').hidden=true;$('dodgePanel').hidden=true;playMusic(isBoss?'boss':'normal');updateHud();}
+function say(t){$('dialogue').textContent=t;}
+function choose(type){if(turnBusy||gameEnded)return;if(type==='fight')showFightMenu();if(type==='act')showActMenu();if(type==='item')showItemMenu();if(type==='mercy')tryMercy();}
+function setOptions(items){$('mainMenu').hidden=true;$('submenu').hidden=false;$('submenu').innerHTML='';items.forEach(it=>{let b=document.createElement('button');b.className='option';b.disabled=!!it.disabled;b.innerHTML='<b>'+it.name+'</b><small>'+it.desc+'</small>';b.onclick=it.run;$('submenu').appendChild(b)});}
+function backMenu(){ $('submenu').hidden=true;$('mainMenu').hidden=false; }
+function showFightMenu(){setOptions([{name:'ATAQUE NORMAL',desc:'Golpe sencillo · sin coste',run:()=>attack(10,false)},{name:'GOLPE CARGADO · 35 TP',desc:'Ataque más poderoso',disabled:tp<35,run:()=>attack(23,true)},{name:'VOLVER',desc:'Regresar a las acciones',run:backMenu}]);say('Elige la intensidad de tu ataque.');}
+function showActMenu(){setOptions(Object.entries(actData).map(([key,a])=>({name:a.name,desc:a.desc+' · '+a.cost+' TP · +'+a.mercy+'% PIEDAD',disabled:tp<a.cost,run:()=>doAct(key)})).concat([{name:'VOLVER',desc:'Regresar a las acciones',run:backMenu}]));say('Un ACTO puede cambiar el ánimo del enemigo.');}
+function showItemMenu(){setOptions([{name:'DEJE* · AGUA',desc:'Recupera 8 VIT · 25 TP',disabled:tp<25||hp===24,run:()=>{tp-=25;hp=Math.min(24,hp+8);updateHud();say('Bebes agua fresca. Recuperas 8 VIT.');enemyTurn();}},{name:'FRAGMENTO DE LUZ',desc:'Recupera 4 VIT · gratis · 1 uso por combate',disabled:enemy.usedHeal||hp===24,run:()=>{enemy.usedHeal=true;hp=Math.min(24,hp+4);updateHud();say('El fragmento se deshace en una luz tibia. +4 VIT.');enemyTurn();}},{name:'VOLVER',desc:'Regresar a las acciones',run:backMenu}]);}
+function attack(dmg,power){if(power)tp-=35;enemyHp=Math.max(0,enemyHp-dmg);violent++;$('enemyBar').style.width=(enemyHp/enemy.hp*100)+'%';updateHud();say(power?'¡GOLPE CARGADO! La energía TP atraviesa la defensa.':'Atacas. La criatura retrocede, sorprendida.');if(enemyHp<=0){resolveEnemy(false);return;}enemyTurn();}
+function doAct(key){let a=actData[key];tp-=a.cost;mercyPct=Math.min(100,mercyPct+a.mercy);tp=Math.min(100,tp+5);updateHud();say(a.text+' PIEDAD '+mercyPct+'%.');if(mercyPct>=100){say('La criatura ya no quiere luchar. Puedes perdonarla.');backMenu();return;}enemyTurn();}
+function tryMercy(){if(mercyPct>=100){resolveEnemy(true);return;}say('Todavía no está lista para dejar de luchar. Usa ACTOS para aumentar la PIEDAD.');}
+function resolveEnemy(pacifist){stopDodge();$('dodgePanel').hidden=true;$('submenu').hidden=true;$('mainMenu').hidden=true;if(pacifist){say('Perdonas a '+enemy.name+'. Su luz se une a la tuya.');tp=Math.min(100,tp+18);}else{say(enemy.name+' se desvanece. El silencio pesa un poco más.');tp=Math.min(100,tp+10);}updateHud();setTimeout(()=>{if(encounterIndex<3){encounterIndex++;startEncounter();}else if(zoneIndex<2){zoneIndex++;encounterIndex=0;showZoneTransition();}else finishStory();},1300);}
+function showZoneTransition(){$('mainMenu').hidden=true;$('submenu').hidden=false;$('submenu').innerHTML='';let t=document.createElement('div');t.className='dialogue';t.textContent='La zona cambia. El eco se vuelve más profundo...';$('submenu').appendChild(t);let b=document.createElement('button');b.textContent='CONTINUAR';b.onclick=startEncounter;$('submenu').appendChild(b);}
+function finishStory(){stopMusic();gameEnded=true;showScene('ending');let pacifist=violent<=3;$('endingTitle').textContent=pacifist?'FINAL · EL ECO COMPARTIDO':'FINAL · EL SILENCIO DEL UMBRAL';$('endingText').textContent=pacifist?'Nox abre el umbral sin destruir a quienes lo custodian. Las criaturas responden con una luz que viaja de un mundo al otro. Por primera vez, ambos lados se escuchan.':'Nox alcanza el corazón del espejo por la fuerza. La grieta se cierra, pero el otro mundo queda en silencio. Has sobrevivido; aun así, algo importante no pudo cruzar.';$('endingNote').textContent=pacifist?'Final piadoso · Aprendiste que escuchar también puede abrir caminos.':'Final violento · El camino terminó, aunque no de la misma manera.';}
+function enemyTurn(){if(turnBusy||gameEnded)return;turnBusy=true;$('mainMenu').hidden=true;$('submenu').hidden=true;$('dodgePanel').hidden=false;timeLeft=enemy.pattern==='final'?10:enemy.pattern==='cross'?9:7;$('dodgeTimer').textContent=timeLeft;$('patternHint').textContent=patternLabel(enemy.pattern);heart={x:50,y:76};placeSoul();$('arena').querySelectorAll('.bullet').forEach(b=>b.remove());bullets=[];patternCount=0;let start=performance.now();spawnTimer=setInterval(()=>spawnPattern(enemy.pattern),patternRate(enemy.pattern));clock=setInterval(()=>{timeLeft--;$('dodgeTimer').textContent=timeLeft;if(timeLeft<=0)finishDodge();},1000);let last=start;function loop(now){let dt=Math.min(35,now-last);last=now;moveSoul(dt);for(let b of bullets){b.x+=b.vx*dt/16;b.y+=b.vy*dt/16;b.el.style.left=b.x+'px';b.el.style.top=b.y+'px';let dx=b.x+5-heart.x,dy=b.y+5-heart.y;if(Math.hypot(dx,dy)<13&&!b.hit){b.hit=true;hp=Math.max(0,hp-2);if(Math.hypot(dx,dy)<8)tp=Math.min(100,tp+3);updateHud();b.el.remove();}}bullets=bullets.filter(b=>!b.hit&&b.y<250&&b.y>-30&&b.x>-30&&b.x<620);if(hp<=0){gameOver();return;}if(turnBusy)raf=requestAnimationFrame(loop);}raf=requestAnimationFrame(loop);}
+function patternLabel(p){return({rain:'LLUVIA: cae entre los huecos.',sweep:'BARRIDO: las filas cruzan la arena.',aim:'PERSECUCIÓN: los orbes siguen tu posición.',spiral:'ESPIRAL: proyectiles desde los bordes.',cross:'CRUZ: líneas desde cuatro direcciones.',final:'ECLIPSE: mezcla de patrones. ¡Mantente en movimiento!'})[p];}
+function patternRate(p){return p==='final'?340:p==='cross'?390:480;}
+function spawnBullet(x,y,vx,vy,kind='diamond'){let el=document.createElement('i');el.className='bullet '+(kind==='orb'?'orb':kind==='gold'?'gold':'');$('arena').appendChild(el);bullets.push({el,x,y,vx,vy,hit:false});}
+function spawnPattern(p){let w=$('arena').clientWidth,h=$('arena').clientHeight,cx=w/2,cy=h/2;patternCount++;if(p==='rain'||(p==='final'&&patternCount%3===0)){let n=p==='final'?4:3;for(let i=0;i<n;i++)spawnBullet(Math.random()*(w-10),-12,Math.sin(patternCount+i)*.55,2.1+Math.random()*1.2,'orb');}
+else if(p==='sweep'){let y=20+(patternCount%4)*44;for(let i=0;i<7;i++)if(i!==(patternCount%7))spawnBullet(-12,y+i*2,3.2,0,'diamond');}
+else if(p==='aim'){let dx=heart.x-cx,dy=heart.y-15,len=Math.hypot(dx,dy)||1;spawnBullet(cx,10,dx/len*2.5,dy/len*2.5,'orb');if(patternCount%2===0)spawnBullet(cx-80,0,1.5,2,'gold');}
+else if(p==='spiral'){let a=patternCount*.75;for(let i=0;i<4;i++){let ang=a+i*Math.PI/2;spawnBullet(cx+Math.cos(ang)*Math.min(w,h)*.42,cy+Math.sin(ang)*Math.min(w,h)*.42,-Math.cos(ang)*2.2,-Math.sin(ang)*2.2,'gold');}}
+else if(p==='cross'){let gap=patternCount%2?Math.floor(Math.random()*5):2;for(let i=0;i<8;i++){if(i!==gap)spawnBullet(i*w/7,-8,0,2.5,'orb');if(i!==7-gap)spawnBullet(-8,i*h/7,2.5,0,'gold');}}
+else if(p==='final'){let a=patternCount*.52;for(let i=0;i<5;i++){let ang=a+i*1.256;spawnBullet(cx,cy,Math.cos(ang)*2.4,Math.sin(ang)*2.4,i%2?'gold':'orb');}if(patternCount%2===0)spawnBullet(Math.random()*w,-8,0,2.8,'diamond');}}
+function moveSoul(dt){let speed=3.1*dt/16;if(keys.arrowleft||keys.a)heart.x-=speed;if(keys.arrowright||keys.d)heart.x+=speed;if(keys.arrowup||keys.w)heart.y-=speed;if(keys.arrowdown||keys.s)heart.y+=speed;let r=$('arena').getBoundingClientRect();heart.x=Math.max(8,Math.min(r.width-8,heart.x));heart.y=Math.max(8,Math.min(r.height-8,heart.y));placeSoul();}
+function placeSoul(){let s=$('soul');s.style.left=heart.x+'px';s.style.top=heart.y+'px';}
+function stopDodge(){turnBusy=false;clearInterval(spawnTimer);clearInterval(clock);cancelAnimationFrame(raf);bullets.forEach(b=>b.el.remove());bullets=[];}
+function finishDodge(){if(!turnBusy)return;stopDodge();$('dodgePanel').hidden=true;$('mainMenu').hidden=false;backMenu();say('¡Sobreviviste al patrón! El movimiento preciso también carga TP.');tp=Math.min(100,tp+8);updateHud();}
+function gameOver(){if(gameEnded)return;gameEnded=true;stopDodge();stopMusic();$('dodgePanel').hidden=true;$('mainMenu').hidden=true;$('submenu').hidden=true;$('gameover').classList.add('show');$('gameoverText').textContent='Tu luz no se ha perdido. Descansa un instante y vuelve a intentarlo; todavía queda camino por recorrer.';over.currentTime=0;over.play().catch(()=>{});}
+document.addEventListener('keydown',e=>{let k=e.key.toLowerCase();keys[k]=true;if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();});document.addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+let dragging=false;$('arena').addEventListener('pointerdown',e=>{if(!turnBusy)return;dragging=true;$('arena').setPointerCapture(e.pointerId);moveTouch(e);});$('arena').addEventListener('pointermove',e=>{if(dragging)moveTouch(e);});$('arena').addEventListener('pointerup',()=>dragging=false);$('arena').addEventListener('pointercancel',()=>dragging=false);function moveTouch(e){let r=$('arena').getBoundingClientRect();heart.x=e.clientX-r.left;heart.y=e.clientY-r.top;placeSoul();}
+// Vocabulario: los nombres y significados marcados como léxico local proceden de CEDIPIEM (Edomex).
+// Los comandos con asterisco se documentan en otras variantes hñähñu y NO se presentan como equivalencias exactas del otomí de Edomex.
+</script>
+</body></html>

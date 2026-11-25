@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende otomí fácilmente</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <header>
+        <h3>Palabra nueva</h3>
+        <h1>¿Cuál es el color rosa?</h1>
+    </header>
+
+    <main class="container grid-card">
+        
+        <!-- Tarjeta 1: Rosa (CORRECTA) -->
+        <div class="card" data-correcta="true" onclick="seleccionarTarjeta(this)">
+            <img src="images/cerdo_pix.png" alt="Color rosa">
+            <h3>1 - Roxa (Rosa)</h3>
+            <!-- event.stopPropagation() evita que al darle play se seleccione o deseleccione sin querer -->
+            <button type="button" onclick="event.stopPropagation(); document.getElementById('audioRoxa').play()">Roxa</button>
+            <br><br>
+            <audio id="audioRoxa" controls onclick="event.stopPropagation()">
+                <source src="audio/Roxa.ogg" type="audio/ogg">
+                Tu navegador no soporta audio.
+            </audio>
+        </div>
+
+        <!-- Tarjeta 2: Naranja -->
+        <div class="card" data-correcta="false" onclick="seleccionarTarjeta(this)">
+            <img src="images/naranja_pix.png" alt="Color naranja">
+            <h3>2 - Naranxa (Naranja)</h3>
+            <button type="button" onclick="event.stopPropagation(); document.getElementById('audioNaranxa').play()">Naranxa</button>
+            <br><br>
+            <audio id="audioNaranxa" controls onclick="event.stopPropagation()">
+                <source src="audio/Naranxa.ogg" type="audio/ogg">
+                Tu navegador no soporta audio.
+            </audio>
+        </div>
+
+        <!-- Tarjeta 3: Café -->
+        <div class="card" data-correcta="false" onclick="seleccionarTarjeta(this)">
+            <img src="images/cafe_pix.png" alt="Color café">
+            <h3>3 - Boxo (Café / Negro)</h3>
+            <button type="button" onclick="event.stopPropagation(); document.getElementById('audioBoxo').play()">Boxo</button>
+            <br><br>
+            <audio id="audioBoxo" controls onclick="event.stopPropagation()">
+                <source src="audio/boxo.ogg" type="audio/ogg">
+                Tu navegador no soporta audio.
+            </audio>
+        </div>
+
+    </main>
+
+    <div class="acciones container">
+        <button type="button" class="btn-accept" onclick="validarRespuesta()">Aceptar</button>
+        <button type="button" class="btn-saltar" onclick="window.location.href='index.php'">Saltar</button>
+    </div>
+
+    <!-- Lógica de validación -->
+    <script>
+        let tarjetaSeleccionada = null;
+
+        function seleccionarTarjeta(elemento) {
+            // Quita la selección de todas las tarjetas
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('seleccionada');
+            });
+
+            // Marca la tarjeta actual
+            elemento.classList.add('seleccionada');
+            tarjetaSeleccionada = elemento;
+        }
+
+        function validarRespuesta() {
+            // Verifica que el usuario haya elegido una opción
+            if (!tarjetaSeleccionada) {
+                alert("Por favor, selecciona una tarjeta primero.");
+                return;
+            }
+
+            // Revisa si la tarjeta tiene data-correcta="true"
+            const esCorrecta = tarjetaSeleccionada.getAttribute('data-correcta') === 'true';
+
+            if (esCorrecta) {
+                alert("¡Respuesta correcta!");
+            } else {
+                alert("¡Respuesta incorrecta!");
+            }
+
+            // Redirige a index.php después de cerrar la alerta
+            window.location.href = 'index.php';
+        }
+    </script>
+
+</body>
+</html>
